@@ -5,9 +5,16 @@ SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)"
 ROOT_DIR="$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd -P)"
 SKILLS_DIR="${SKILLS_DIR:-$HOME/.agents/skills}"
 
-for SOURCE_DIR in "$ROOT_DIR"/skills/*; do
-    [ -d "$SOURCE_DIR" ] || continue
-    SKILL_NAME="$(basename -- "$SOURCE_DIR")"
+if [ "$#" -eq 0 ]; then
+    set -- "$ROOT_DIR"/skills/*
+fi
+
+for ITEM in "$@"; do
+    if [ -d "$ITEM" ]; then
+        SKILL_NAME="$(basename -- "$ITEM")"
+    else
+        SKILL_NAME="$ITEM"
+    fi
     TARGET_DIR="$SKILLS_DIR/$SKILL_NAME"
     rm -rf "$TARGET_DIR"
     printf '%s\n' "$TARGET_DIR"

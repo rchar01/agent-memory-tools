@@ -229,16 +229,17 @@ Only agents that need context should retrieve memory.
 
 Primary users:
 
+- `planner`, optionally for large or ambiguous planning
+- `context-builder`
 - `coder-1`
 - `coder-2`
 - `coder-3`
-
-Optional users:
-
 - `code-reviewer`
-- `validator`
-- `git-committer`
-- `knowledge-writer`
+- `code-validator`
+- `memory-manager`
+- `git-committer`, optionally for commit context
+
+Only `memory-manager` writes, cleans, indexes, archives, or otherwise modifies memory.
 
 Retrieval flow:
 

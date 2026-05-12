@@ -1,27 +1,27 @@
 ---
-name: agent-memory-write
-description: Create durable Markdown memories through `agent-memory write`, then verify the memory store.
+name: memory-write
+description: Create durable Markdown memories through `agent-memory write`; only `memory-manager` may use this skill.
 compatibility: opencode
 metadata:
   audience: agents
   workflow: memory-write
   domain: agent-memory
-  allowed_agents: memory-summarizer
+  allowed_agents: memory-manager
 ---
 
-# Agent Memory Write
+# Memory Write
 
 ## Purpose
 
-Use this skill when acting as `memory-summarizer` after completed work may contain durable knowledge worth preserving.
+Use this skill when acting as `memory-manager` after completed work may contain durable knowledge worth preserving.
 
 ## Allowed Agent
 
-- `memory-summarizer`
+- `memory-manager`.
 
 ## Not Allowed
 
-- Coders, reviewers, validators, git committers, and knowledge writers must not create memory entries.
+- No other agent may create memory entries.
 - Do not manually edit `INDEX.md` or write files directly into `entries/`.
 - Do not create a memory for every task.
 
@@ -51,10 +51,11 @@ Do not store:
 
 ## Write Flow
 
-1. Draft a short structured JSON, simple YAML, or Markdown-frontmatter input file.
-2. Run `agent-memory write --input <file>`.
-3. Run `agent-memory verify` if the write command did not already provide enough verification context.
-4. Stop and report errors if verification fails.
+1. Use task summarization, decision extraction, and tagging judgment before writing.
+2. Draft a short structured JSON, simple YAML, or Markdown-frontmatter input file.
+3. Run `agent-memory write --input <file>`.
+4. Run `agent-memory verify` if the write command did not already provide enough verification context.
+5. Stop and report errors if verification fails.
 
 ## Required Fields
 

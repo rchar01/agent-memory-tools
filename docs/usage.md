@@ -65,7 +65,7 @@ make backup
 backup -> test -> reinstall -> verify
 ```
 
-`make install-skills` copies the repo skills into `${SKILLS_DIR:-$HOME/.agents/skills}`.
+`make install-skills` copies the repo skills into `${SKILLS_DIR:-$HOME/.agents/skills}`. Install selected skills with `make install-skills SKILL_NAMES="memory-retrieval memory-verify"`.
 
 Use `MEMORY_DIR` when operating on a non-default memory store:
 
@@ -134,19 +134,26 @@ To install elsewhere:
 make install-skills SKILLS_DIR=/path/to/skills
 ```
 
+To install or uninstall selected skills by name:
+
+```bash
+make install-skills SKILL_NAMES="memory-retrieval memory-verify"
+make uninstall-skills SKILL_NAMES="memory-retrieval memory-verify"
+```
+
 Installed skills:
 
-- `agent-memory-retrieval` for agents allowed to retrieve compact memory briefs.
-- `agent-memory-write` for `memory-summarizer` entry creation.
-- `agent-memory-clean` for `memory-cleaner` maintenance.
-- `agent-memory-verify` for summarizer, cleaner, and validator integrity checks.
-- `agent-memory-backup` for backups before risky maintenance or upgrades.
+- `memory-retrieval` for agents allowed to retrieve compact memory briefs.
+- `memory-write` for `memory-manager` entry creation.
+- `memory-index-update` for `memory-manager` index regeneration.
+- `memory-clean` for `memory-manager` maintenance, backups, deduplication, archiving, and superseding.
+- `memory-verify` for `memory-manager` and `code-validator` integrity checks.
 
 The role access matrix is documented in [Tooling and Agent Editing Specification](memory-tooling-and-agent-editing.md).
 
 ## Write
 
-Memory summarizers create entries through the write command:
+`memory-manager` creates entries through the write command:
 
 ```bash
 agent-memory write --input new-memory.yaml
@@ -205,7 +212,7 @@ agent-memory clean --supersede old-auth-token-format --by auth-token-format-v2
 agent-memory clean --archive old-auth-token-format --reason "promoted to docs"
 ```
 
-Semantic merging is intentionally not automatic. The memory-cleaner agent decides merge policy; tools perform safe file operations.
+Semantic merging is intentionally not automatic. The `memory-manager` decides merge policy; tools perform safe file operations.
 
 ## Backup
 

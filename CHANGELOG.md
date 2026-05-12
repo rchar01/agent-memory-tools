@@ -9,8 +9,9 @@ and adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- Role-specific OpenCode skill docs for retrieval, writing, cleaning, verification, and backup workflows.
-- `make install-skills` and `make uninstall-skills` helpers for installing repo skills.
+- Role-specific OpenCode memory skills for retrieval, writing, index regeneration, cleaning, and verification workflows.
+- `make install-skills` and `make uninstall-skills` helpers for installing all repo skills or selected skills by name.
+- Single `memory-manager` access model for memory writing, cleaning, indexing, archiving, and maintenance.
 - README introduction explaining how local Markdown memory is preserved separately from the installed CLI.
 - Installation guidance for cloning from the Codeberg repository and installing from a local checkout.
 

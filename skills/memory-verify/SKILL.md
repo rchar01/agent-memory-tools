@@ -1,15 +1,15 @@
 ---
-name: agent-memory-verify
-description: Verify Markdown memory store integrity with `agent-memory verify` and stop on failures.
+name: memory-verify
+description: Verify Markdown memory store integrity with `agent-memory verify`; only `memory-manager` writes/cleanup verification is allowed.
 compatibility: opencode
 metadata:
   audience: agents
   workflow: memory-verify
   domain: agent-memory
-  allowed_agents: memory-summarizer,memory-cleaner,validator
+  allowed_agents: memory-manager,code-validator
 ---
 
-# Agent Memory Verify
+# Memory Verify
 
 ## Purpose
 
@@ -17,9 +17,8 @@ Use this skill to verify memory integrity after writes, cleanup, superseding, ar
 
 ## Allowed Agents
 
-- `memory-summarizer`
-- `memory-cleaner`
-- `validator`
+- `memory-manager` verifies after memory writes, indexing, cleaning, archiving, and maintenance.
+- `code-validator` may verify integrity but must not write, clean, index, or archive memory.
 
 ## Commands
 
@@ -57,4 +56,4 @@ The verifier checks:
 
 ## Failure Rule
 
-If verification fails, stop memory work and report the errors. Do not continue writing, cleaning, or claiming the memory store is healthy.
+If verification fails, stop memory work and report the errors. Do not continue writing, cleaning, indexing, or claiming the memory store is healthy.

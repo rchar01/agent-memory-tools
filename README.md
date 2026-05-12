@@ -97,6 +97,12 @@ Install the agent-facing skills into `~/.agents/skills`:
 make install-skills
 ```
 
+Install selected skills by name:
+
+```bash
+make install-skills SKILL_NAMES="memory-retrieval memory-verify"
+```
+
 Override the skill target if needed:
 
 ```bash
@@ -155,6 +161,8 @@ Install or remove the agent-facing skills:
 ```bash
 make install-skills
 make uninstall-skills
+make install-skills SKILL_NAMES="memory-retrieval"
+make uninstall-skills SKILL_NAMES="memory-retrieval"
 ```
 
 Pass a non-default memory directory to verification or backup targets:
@@ -212,13 +220,13 @@ agent-memory backup
 
 ## Agent Skills
 
-This repository ships role-specific OpenCode skills under `skills/`. Install them with `make install-skills` so agents know which memory operations they are allowed to use.
+This repository ships role-specific OpenCode memory skills under `skills/`. Install them with `make install-skills` so agents know which memory operations they are allowed to use.
 
-- `agent-memory-retrieval`: for coders, reviewers, validators, git committers, and knowledge writers to retrieve compact memory briefs.
-- `agent-memory-write`: for memory summarizers to create durable entries through `agent-memory write`.
-- `agent-memory-clean`: for memory cleaners to deduplicate, archive, and supersede memories.
-- `agent-memory-verify`: for memory summarizers, memory cleaners, and validators to check store integrity.
-- `agent-memory-backup`: for memory maintainers to create archives before risky cleanup or upgrades.
+- `memory-retrieval`: for agents allowed to retrieve compact memory briefs when useful.
+- `memory-write`: for `memory-manager` to create durable entries through `agent-memory write`.
+- `memory-index-update`: for `memory-manager` to regenerate `INDEX.md`.
+- `memory-clean`: for `memory-manager` to back up, deduplicate, archive, and supersede memories.
+- `memory-verify`: for `memory-manager` and `code-validator` to check store integrity.
 
 The access model comes from `docs/memory-tooling-and-agent-editing.md`.
 

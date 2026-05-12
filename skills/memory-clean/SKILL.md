@@ -1,39 +1,56 @@
 ---
-name: agent-memory-clean
-description: Maintain the Markdown memory store with `agent-memory clean`, archive stale entries, mark superseded entries, and verify afterwards.
+name: memory-clean
+description: Let `memory-manager` maintain the Markdown memory store with cleanup, deduplication, archiving, backups, and verification.
 compatibility: opencode
 metadata:
   audience: agents
   workflow: memory-clean
   domain: agent-memory
-  allowed_agents: memory-cleaner
+  allowed_agents: memory-manager
 ---
 
-# Agent Memory Clean
+# Memory Clean
 
 ## Purpose
 
-Use this skill when acting as `memory-cleaner` to deduplicate, archive, supersede, or otherwise maintain memory quality.
+Use this skill when acting as `memory-manager` to deduplicate, archive, supersede, back up, or otherwise maintain memory quality.
 
 ## Allowed Agent
 
-- `memory-cleaner`
+- `memory-manager`.
 
 ## Not Allowed
 
-- Coders, reviewers, validators, git committers, and knowledge writers must not clean, archive, or manually edit memory.
+- No other agent may clean, archive, back up for cleanup, or manually edit memory.
 - Do not manually move files or edit `INDEX.md`; use the CLI so index regeneration and verification stay consistent.
 
 ## Cleanup Flow
 
-1. Create a backup before broad cleanup or risky restructuring.
+1. Create a backup before broad cleanup, deduplication, archive work, or risky restructuring.
 2. Inspect duplicates or stale candidates through CLI output and targeted retrieval.
-3. Decide semantic cleanup policy as the memory-cleaner.
+3. Decide semantic cleanup policy as `memory-manager`.
 4. Run `agent-memory clean ...` for file operations.
 5. Run `agent-memory verify`.
 6. Stop and report if verification fails.
 
-## Commands
+## Backup Commands
+
+Create a default backup next to the memory directory:
+
+```sh
+agent-memory backup
+```
+
+Choose an output file or directory:
+
+```sh
+agent-memory backup --output ~/backups/agent-memory-before-cleanup.tar.gz
+agent-memory backup --output ~/backups/
+```
+
+The archive contains the memory directory under a top-level `memory/` path. Restore is intentionally manual because overwriting memory is destructive.
+
+## Cleanup Commands
 
 Find duplicate or overlapping active memories:
 
@@ -51,12 +68,6 @@ Mark one active memory as superseded by another:
 
 ```sh
 agent-memory clean --supersede old-auth-token-format --by auth-token-format-v2
-```
-
-Regenerate the index when needed:
-
-```sh
-agent-memory index-update
 ```
 
 Verify final state:

@@ -13,7 +13,7 @@
 - Run one focused test with `python3 -m pytest -o addopts='' tests/test_agent_memory_tools.py::test_name`.
 - Check CLI parsing without installing by running Python against `src`, for example `PYTHONPATH=src python3 -m agent_memory_tools.cli --help`.
 - Install locally with `make install` or `make install-editable`; both require `pipx`.
-- Install repo skills with `make install-skills`; override the target with `SKILLS_DIR=/path/to/skills`.
+- Install repo skills with `make install-skills`; set `SKILL_NAMES="memory-retrieval"` for selected skills or `SKILLS_DIR=/path/to/skills` for a custom target.
 - `make update` intentionally runs `backup -> test -> reinstall -> verify` for an installed CLI.
 - Use `agent-memory --memory-dir /tmp/some-memory ...` or a temp directory for manual CLI experiments so real user memory is not modified.
 
