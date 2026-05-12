@@ -2,11 +2,15 @@
 
 This file gives a short, release-oriented view of what changed between versions.
 
+## v0.2.0 - 2026-05-12
+
+This release updates the shipped skills to the focused `memory-*` model, adds `memory-index-update`, and makes `memory-manager` the only agent that writes, cleans, indexes, archives, or maintains memory.
+
+Skill installation now supports selected skills by name, for example `make install-skills SKILL_NAMES="memory-retrieval memory-verify"`.
+
 ## v0.1.0 - 2026-05-12
 
-This release adds role-specific OpenCode memory skills for retrieval, write, index update, clean, and verify workflows. Install all skills with `make install-skills`, or selected skills with `SKILL_NAMES="memory-retrieval memory-verify"`.
-
-The skill access model now uses a single `memory-manager` for writing, cleaning, indexing, archiving, and maintenance.
+This release adds role-specific OpenCode skills for memory retrieval, write, clean, verify, and backup workflows. Install them with `make install-skills`.
 
 The README now explains how the package preserves memory as local Markdown files, where to clone the repository, and how to install from a local checkout.
 
