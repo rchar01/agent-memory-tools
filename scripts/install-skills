@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+set -eu
+
+SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)"
+ROOT_DIR="$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd -P)"
+SKILLS_DIR="${SKILLS_DIR:-$HOME/.agents/skills}"
+
+mkdir -p "$SKILLS_DIR"
+
+for SOURCE_DIR in "$ROOT_DIR"/skills/*; do
+    [ -d "$SOURCE_DIR" ] || continue
+    SKILL_NAME="$(basename -- "$SOURCE_DIR")"
+    TARGET_DIR="$SKILLS_DIR/$SKILL_NAME"
+    rm -rf "$TARGET_DIR"
+    cp -R "$SOURCE_DIR" "$TARGET_DIR"
+    printf '%s\n' "$TARGET_DIR"
+done

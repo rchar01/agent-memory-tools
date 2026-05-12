@@ -50,6 +50,8 @@ The project includes a small Makefile for common operations:
 make help
 make install
 make install-editable
+make install-skills
+make uninstall-skills
 make update
 make uninstall
 make test
@@ -62,6 +64,8 @@ make backup
 ```text
 backup -> test -> reinstall -> verify
 ```
+
+`make install-skills` copies the repo skills into `${SKILLS_DIR:-$HOME/.agents/skills}`.
 
 Use `MEMORY_DIR` when operating on a non-default memory store:
 
@@ -115,6 +119,30 @@ agent-memory retrieve --query "dashboard auth token" --project dashboard --tags 
 ```
 
 Default retrieval returns up to three memories. Hard maximum is five.
+
+## Agent Skills
+
+Role-specific OpenCode skills live under `skills/` and can be installed with:
+
+```bash
+make install-skills
+```
+
+To install elsewhere:
+
+```bash
+make install-skills SKILLS_DIR=/path/to/skills
+```
+
+Installed skills:
+
+- `agent-memory-retrieval` for agents allowed to retrieve compact memory briefs.
+- `agent-memory-write` for `memory-summarizer` entry creation.
+- `agent-memory-clean` for `memory-cleaner` maintenance.
+- `agent-memory-verify` for summarizer, cleaner, and validator integrity checks.
+- `agent-memory-backup` for backups before risky maintenance or upgrades.
+
+The role access matrix is documented in [Tooling and Agent Editing Specification](memory-tooling-and-agent-editing.md).
 
 ## Write
 

@@ -14,3 +14,5 @@ and adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Safety checks for likely secrets, prompt-injection text, invisible Unicode, large diffs, and large logs.
 - Atomic writes, file locking, index regeneration, and post-write verification for memory updates.
 - Documentation for install, usage, operations, memory format, and agent editing boundaries.
+- Role-specific OpenCode skill docs for retrieval, writing, cleaning, verification, and backup workflows.
+- `make install-skills` and `make uninstall-skills` helpers for installing repo skills.

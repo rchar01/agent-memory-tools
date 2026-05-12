@@ -14,6 +14,14 @@ Review/cleaning agents verify memory quality.
 
 ## Tool Responsibilities
 
+Install the matching OpenCode skills with:
+
+```bash
+make install-skills
+```
+
+The skill sources live in `skills/` and mirror the tool boundaries below.
+
 ### `memory-retrieval`
 
 Used by:

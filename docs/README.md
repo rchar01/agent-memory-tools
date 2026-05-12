@@ -8,3 +8,5 @@ Canonical documentation for Agent Memory Tools lives here.
 - [Tooling and Agent Editing Specification](memory-tooling-and-agent-editing.md) - tool responsibilities, role permissions, write flow, cleanup flow, and verification rules.
 
 The root `README.md` is intentionally a quick start. These docs are the source of truth for agent behavior.
+
+Role-specific OpenCode skill sources live in `../skills/` and are installed with `make install-skills`.

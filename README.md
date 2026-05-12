@@ -24,6 +24,22 @@ memory/
 └── archive/
 ```
 
+## How Memory Is Preserved
+
+`agent-memory-tools` preserves agent memory as Markdown files on your local filesystem. The CLI package and memory data are separate, so reinstalling or uninstalling the CLI does not delete the memory directory.
+
+By default, memory is kept here:
+
+```text
+~/.local/share/agent-memory-tools/memory
+```
+
+Each memory is written as one Markdown file in `entries/`, and `INDEX.md` is regenerated as a compact lookup table for retrieval. Retrieval reads the index first, then opens only the most relevant active entries instead of loading the whole memory store.
+
+Write and cleanup commands use file locking, atomic writes, safety scans, index regeneration, and verification so the memory store stays consistent. Backups are created as `.tar.gz` archives containing the full memory directory.
+
+More details are in `docs/memory-system-spec.md`, `docs/memory-tooling-and-agent-editing.md`, and `docs/operations.md`.
+
 ## Install
 
 Clone the repository first:
@@ -75,6 +91,18 @@ Development install from the cloned checkout:
 make install-editable
 ```
 
+Install the agent-facing skills into `~/.agents/skills`:
+
+```bash
+make install-skills
+```
+
+Override the skill target if needed:
+
+```bash
+make install-skills SKILLS_DIR=/path/to/skills
+```
+
 Update an installed CLI from the same checkout:
 
 ```bash
@@ -120,6 +148,13 @@ Uninstall the CLI while keeping memory data untouched:
 
 ```bash
 make uninstall
+```
+
+Install or remove the agent-facing skills:
+
+```bash
+make install-skills
+make uninstall-skills
 ```
 
 Pass a non-default memory directory to verification or backup targets:
@@ -174,6 +209,18 @@ Back up memory data before upgrades or large cleanup:
 ```bash
 agent-memory backup
 ```
+
+## Agent Skills
+
+This repository ships role-specific OpenCode skills under `skills/`. Install them with `make install-skills` so agents know which memory operations they are allowed to use.
+
+- `agent-memory-retrieval`: for coders, reviewers, validators, git committers, and knowledge writers to retrieve compact memory briefs.
+- `agent-memory-write`: for memory summarizers to create durable entries through `agent-memory write`.
+- `agent-memory-clean`: for memory cleaners to deduplicate, archive, and supersede memories.
+- `agent-memory-verify`: for memory summarizers, memory cleaners, and validators to check store integrity.
+- `agent-memory-backup`: for memory maintainers to create archives before risky cleanup or upgrades.
+
+The access model comes from `docs/memory-tooling-and-agent-editing.md`.
 
 ## Write Input Format
 

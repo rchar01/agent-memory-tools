@@ -9,7 +9,7 @@ MEMORY_DIR ?=
 MEMORY_ARGS := $(if $(strip $(MEMORY_DIR)),--memory-dir "$(MEMORY_DIR)",)
 DEFAULT_MEMORY_DIR := $(HOME)/.local/share/agent-memory-tools/memory
 
-.PHONY: help check-pipx check-command install install-editable uninstall reinstall update test verify backup
+.PHONY: help check-pipx check-command install install-editable uninstall reinstall install-skills uninstall-skills update test verify backup
 
 ## Show available commands
 help:
@@ -41,6 +41,14 @@ uninstall: check-pipx
 ## Reinstall the CLI from the current checkout
 reinstall: check-pipx
 	$(PIPX) install --force .
+
+## Install agent-memory skills into ~/.agents/skills
+install-skills:
+	@./scripts/install-skills
+
+## Remove agent-memory skills from ~/.agents/skills
+uninstall-skills:
+	@./scripts/uninstall-skills
 
 ## Back up memory, run tests, reinstall, then verify
 update: backup test reinstall verify
