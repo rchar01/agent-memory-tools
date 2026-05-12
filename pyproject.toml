@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-memory-tools"
+version = "0.0.1"
+description = "Local markdown memory tools for coding agents"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Agent Memory Tools" }]
+license = { text = "MIT" }
+keywords = ["agents", "memory", "markdown", "cli"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Environment :: Console",
+    "Topic :: Software Development",
+]
+
+[project.urls]
+Repository = "https://codeberg.org/rch/agent-memory-tools.git"
+
+[project.scripts]
+agent-memory = "agent_memory_tools.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
