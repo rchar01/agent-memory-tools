@@ -5,6 +5,17 @@ All notable changes to `agent-memory-tools` are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-05-19
+
+### Added
+
+- `role-scoped` and `all-agents` skill profiles under `skillsets/`.
+- Skill installation by agent group with `SKILL_GROUP`, including `memory-manager`, `code-validator`, and `all`.
+
+### Changed
+
+- Skill installation now reads from profile-specific `skillsets/` sources instead of a single `skills/` source tree.
+
 ## [1.0.0] - 2026-05-12
 
 ### Added

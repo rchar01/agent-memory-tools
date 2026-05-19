@@ -6,6 +6,7 @@ metadata:
   audience: agents
   workflow: memory-clean
   domain: agent-memory
+  access_profile: role-scoped
   allowed_agents: memory-manager
 ---
 
@@ -35,15 +36,8 @@ Use this skill when acting as `memory-manager` to deduplicate, archive, supersed
 
 ## Backup Commands
 
-Create a default backup next to the memory directory:
-
 ```sh
 agent-memory backup
-```
-
-Choose an output file or directory:
-
-```sh
 agent-memory backup --output ~/backups/agent-memory-before-cleanup.tar.gz
 agent-memory backup --output ~/backups/
 ```
@@ -52,27 +46,10 @@ The archive contains the memory directory under a top-level `memory/` path. Rest
 
 ## Cleanup Commands
 
-Find duplicate or overlapping active memories:
-
 ```sh
 agent-memory clean --find-duplicates
-```
-
-Archive an active memory:
-
-```sh
 agent-memory clean --archive old-auth-token-format --reason "promoted to docs"
-```
-
-Mark one active memory as superseded by another:
-
-```sh
 agent-memory clean --supersede old-auth-token-format --by auth-token-format-v2
-```
-
-Verify final state:
-
-```sh
 agent-memory verify
 ```
 

@@ -13,7 +13,7 @@
 - Run one focused test with `python3 -m pytest -o addopts='' tests/test_agent_memory_tools.py::test_name`.
 - Check CLI parsing without installing by running Python against `src`, for example `PYTHONPATH=src python3 -m agent_memory_tools.cli --help`.
 - Install locally with `make install` or `make install-editable`; both require `pipx`.
-- Install repo skills with `make install-skills`; set `SKILL_NAMES="memory-retrieval"` for selected skills or `SKILLS_DIR=/path/to/skills` for a custom target.
+- Install repo skills with `make install-skills`; set `SKILL_PROFILE=all-agents`, `SKILL_GROUP=memory-manager`, `SKILL_NAMES="memory-retrieval"`, or `SKILLS_DIR=/path/to/skills` as needed.
 - `make update` intentionally runs `backup -> test -> reinstall -> verify` for an installed CLI.
 - Use `agent-memory --memory-dir /tmp/some-memory ...` or a temp directory for manual CLI experiments so real user memory is not modified.
 
@@ -28,7 +28,7 @@
 - `verifier.py` is the integrity gate for entries, index consistency, duplicate IDs, unsafe content, and summary warnings.
 - `cleaner.py` handles duplicate reporting, archiving to `archive/YYYY-MM/`, and superseding active entries.
 - `backup.py` archives the entire memory directory under a top-level `memory/` path.
-- Agent-facing skill docs live under `skills/`; keep them aligned with `docs/memory-tooling-and-agent-editing.md` and CLI behavior.
+- Agent-facing skill docs live under `skillsets/`; keep profiles aligned with `docs/memory-tooling-and-agent-editing.md` and CLI behavior.
 
 ## Testing And Safety Quirks
 

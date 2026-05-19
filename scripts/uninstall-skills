@@ -4,9 +4,49 @@ set -eu
 SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)"
 ROOT_DIR="$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd -P)"
 SKILLS_DIR="${SKILLS_DIR:-$HOME/.agents/skills}"
+SKILL_PROFILE="${SKILL_PROFILE:-role-scoped}"
+SKILL_GROUP="${SKILL_GROUP:-}"
+SKILLSET_DIR="$ROOT_DIR/skillsets/$SKILL_PROFILE"
+
+group_skills() {
+    case "$1" in
+        orchestrator)
+            return 0
+            ;;
+        planner|context-builder|coder-1|coder-2|coder-3|code-reviewer|git-committer)
+            printf '%s\n' memory-retrieval
+            ;;
+        code-validator)
+            printf '%s\n' memory-retrieval memory-verify
+            ;;
+        memory-manager|all)
+            printf '%s\n' memory-retrieval memory-write memory-index-update memory-clean memory-verify
+            ;;
+        *)
+            printf '%s\n' "unknown skill group: $1" >&2
+            exit 1
+            ;;
+    esac
+}
+
+if [ ! -d "$SKILLSET_DIR" ]; then
+    printf '%s\n' "unknown skill profile: $SKILL_PROFILE" >&2
+    exit 1
+fi
+
+if [ "$#" -gt 0 ]; then
+    :
+elif [ -n "${SKILL_NAMES:-}" ]; then
+    set -- $SKILL_NAMES
+elif [ -n "$SKILL_GROUP" ]; then
+    set -- $(group_skills "$SKILL_GROUP")
+else
+    set -- "$SKILLSET_DIR"/*
+fi
 
 if [ "$#" -eq 0 ]; then
-    set -- "$ROOT_DIR"/skills/*
+    printf '%s\n' "No skills selected for profile '$SKILL_PROFILE'."
+    exit 0
 fi
 
 for ITEM in "$@"; do

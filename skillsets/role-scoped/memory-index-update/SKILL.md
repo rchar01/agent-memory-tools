@@ -6,6 +6,7 @@ metadata:
   audience: agents
   workflow: memory-index-update
   domain: agent-memory
+  access_profile: role-scoped
   allowed_agents: memory-manager
 ---
 
@@ -26,21 +27,9 @@ Use this skill when acting as `memory-manager` to regenerate `INDEX.md` from act
 
 ## Commands
 
-Regenerate the index:
-
 ```sh
 agent-memory index-update
-```
-
-Verify after regeneration:
-
-```sh
 agent-memory verify
-```
-
-Use a non-default memory store:
-
-```sh
 agent-memory --memory-dir /path/to/memory index-update
 agent-memory --memory-dir /path/to/memory verify
 ```

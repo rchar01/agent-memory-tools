@@ -6,6 +6,8 @@ CMD ?= agent-memory
 PIPX ?= pipx
 PYTHON ?= python3
 MEMORY_DIR ?=
+SKILL_PROFILE ?= role-scoped
+SKILL_GROUP ?=
 SKILL_NAMES ?=
 MEMORY_ARGS := $(if $(strip $(MEMORY_DIR)),--memory-dir "$(MEMORY_DIR)",)
 DEFAULT_MEMORY_DIR := $(HOME)/.local/share/agent-memory-tools/memory
@@ -43,13 +45,13 @@ uninstall: check-pipx
 reinstall: check-pipx
 	$(PIPX) install --force .
 
-## Install agent-memory skills into ~/.agents/skills; optionally set SKILL_NAMES="memory-retrieval"
+## Install skills; set SKILL_PROFILE, SKILL_GROUP, SKILL_NAMES, or SKILLS_DIR as needed
 install-skills:
-	@./scripts/install-skills $(SKILL_NAMES)
+	@SKILL_PROFILE="$(SKILL_PROFILE)" SKILL_GROUP="$(SKILL_GROUP)" ./scripts/install-skills $(SKILL_NAMES)
 
-## Remove agent-memory skills from ~/.agents/skills; optionally set SKILL_NAMES="memory-retrieval"
+## Remove skills; set SKILL_PROFILE, SKILL_GROUP, SKILL_NAMES, or SKILLS_DIR as needed
 uninstall-skills:
-	@./scripts/uninstall-skills $(SKILL_NAMES)
+	@SKILL_PROFILE="$(SKILL_PROFILE)" SKILL_GROUP="$(SKILL_GROUP)" ./scripts/uninstall-skills $(SKILL_NAMES)
 
 ## Back up memory, run tests, reinstall, then verify
 update: backup test reinstall verify

@@ -65,7 +65,16 @@ make backup
 backup -> test -> reinstall -> verify
 ```
 
-`make install-skills` copies the repo skills into `${SKILLS_DIR:-$HOME/.agents/skills}`. Install selected skills with `make install-skills SKILL_NAMES="memory-retrieval memory-verify"`.
+`make install-skills` copies repo skills into `${SKILLS_DIR:-$HOME/.agents/skills}`. It installs the default `role-scoped` profile unless `SKILL_PROFILE` is set.
+
+Examples:
+
+```bash
+make install-skills
+make install-skills SKILL_PROFILE=all-agents
+make install-skills SKILL_GROUP=memory-manager
+make install-skills SKILL_NAMES="memory-retrieval memory-verify"
+```
 
 Use `MEMORY_DIR` when operating on a non-default memory store:
 
@@ -122,10 +131,28 @@ Default retrieval returns up to three memories. Hard maximum is five.
 
 ## Agent Skills
 
-Role-specific OpenCode skills live under `skills/` and can be installed with:
+OpenCode memory skill profiles live under `skillsets/` and can be installed with:
 
 ```bash
 make install-skills
+```
+
+Profiles:
+
+- `role-scoped`: default; only the mapped agents should use each skill.
+- `all-agents`: permissive skillset; every installed memory skill is available to any agent.
+
+Install the all-agents skillset:
+
+```bash
+make install-skills SKILL_PROFILE=all-agents
+```
+
+Install by agent group:
+
+```bash
+make install-skills SKILL_GROUP=memory-manager
+make install-skills SKILL_GROUP=code-validator
 ```
 
 To install elsewhere:
@@ -140,6 +167,8 @@ To install or uninstall selected skills by name:
 make install-skills SKILL_NAMES="memory-retrieval memory-verify"
 make uninstall-skills SKILL_NAMES="memory-retrieval memory-verify"
 ```
+
+Supported `SKILL_GROUP` values are `orchestrator`, `planner`, `context-builder`, `coder-1`, `coder-2`, `coder-3`, `code-reviewer`, `code-validator`, `memory-manager`, `git-committer`, and `all`.
 
 Installed skills:
 

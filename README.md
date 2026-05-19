@@ -95,10 +95,23 @@ Development install from the cloned checkout:
 make install-editable
 ```
 
-Install the agent-facing skills into `~/.agents/skills`:
+Install the default role-scoped skills into `~/.agents/skills`:
 
 ```bash
 make install-skills
+```
+
+Install the all-agents skillset, where every installed memory skill is available to any agent:
+
+```bash
+make install-skills SKILL_PROFILE=all-agents
+```
+
+Install skills by agent group:
+
+```bash
+make install-skills SKILL_GROUP=memory-manager
+make install-skills SKILL_GROUP=code-validator
 ```
 
 Install selected skills by name:
@@ -165,7 +178,10 @@ Install or remove the agent-facing skills:
 ```bash
 make install-skills
 make uninstall-skills
+make install-skills SKILL_PROFILE=all-agents
+make install-skills SKILL_GROUP=memory-manager
 make install-skills SKILL_NAMES="memory-retrieval"
+make uninstall-skills SKILL_GROUP=memory-manager
 make uninstall-skills SKILL_NAMES="memory-retrieval"
 ```
 
@@ -224,7 +240,21 @@ agent-memory backup
 
 ## Agent Skills
 
-This repository ships role-specific OpenCode memory skills under `skills/`. Install them with `make install-skills` so agents know which memory operations they are allowed to use.
+This repository ships OpenCode memory skill profiles under `skillsets/`. Install them with `make install-skills` so agents know which memory operations they are allowed to use.
+
+Profiles:
+
+- `role-scoped`: default profile; write, clean, index, and maintenance skills are limited to `memory-manager`.
+- `all-agents`: permissive skillset; every installed memory skill is available to any agent.
+
+Install examples:
+
+```bash
+make install-skills
+make install-skills SKILL_PROFILE=all-agents
+make install-skills SKILL_GROUP=memory-manager
+make install-skills SKILL_NAMES="memory-retrieval memory-verify"
+```
 
 - `memory-retrieval`: for agents allowed to retrieve compact memory briefs when useful.
 - `memory-write`: for `memory-manager` to create durable entries through `agent-memory write`.

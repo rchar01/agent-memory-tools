@@ -6,6 +6,7 @@ metadata:
   audience: agents
   workflow: memory-write
   domain: agent-memory
+  access_profile: role-scoped
   allowed_agents: memory-manager
 ---
 
@@ -65,44 +66,6 @@ Do not store:
 - `importance`: number from `0` to `1`.
 - `summary`: short actionable summary.
 - `title`: clear human-readable heading.
-
-Useful optional fields:
-
-- `decisions`
-- `impact`
-- `related_projects`
-- `important_files`
-- `retrieve_when`
-- `notes`
-
-## Example Input
-
-```yaml
-id: auth-token-format
-project: backend
-tags: [auth, jwt, dashboard]
-importance: 0.9
-title: JWT validation moved to shared middleware
-summary: JWT validation now happens in shared backend middleware, and dashboard depends on token payload shape.
-decisions:
-  - Do not parse JWT tokens directly inside route handlers.
-  - Use src/middleware/auth.ts for token validation.
-impact:
-  - Dashboard may break if token payload fields change.
-related_projects: [backend, dashboard, workers]
-important_files:
-  - src/middleware/auth.ts
-retrieve_when:
-  - JWT validation
-  - dashboard authentication
-```
-
-Create it:
-
-```sh
-agent-memory write --input new-memory.yaml
-agent-memory verify
-```
 
 ## Safety Model
 

@@ -6,6 +6,7 @@ metadata:
   audience: agents
   workflow: memory-verify
   domain: agent-memory
+  access_profile: role-scoped
   allowed_agents: memory-manager,code-validator
 ---
 
@@ -22,37 +23,15 @@ Use this skill to verify memory integrity after writes, cleanup, superseding, ar
 
 ## Commands
 
-Human-readable verification:
-
 ```sh
 agent-memory verify
-```
-
-Machine-readable verification:
-
-```sh
 agent-memory verify --json
-```
-
-Verify a non-default memory store:
-
-```sh
 agent-memory --memory-dir /path/to/memory verify
 ```
 
 ## Verification Checks
 
-The verifier checks:
-
-- `INDEX.md` exists and points to real files.
-- All active entries appear in `INDEX.md`.
-- Entry IDs are unique and match active filenames.
-- Required fields are present.
-- Tags are lowercase kebab-case.
-- `importance` is between `0` and `1`.
-- `status` is `active`, `superseded`, or `archived`.
-- Archived entries are not left under `entries/`.
-- Unsafe content such as likely secrets, prompt injection, invisible Unicode, large diffs, and large logs is rejected.
+The verifier checks index consistency, required fields, duplicate IDs, filename matches, tag format, importance range, status values, archived entry placement, and unsafe content.
 
 ## Failure Rule
 

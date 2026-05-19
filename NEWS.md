@@ -2,6 +2,10 @@
 
 This file gives a short, release-oriented view of what changed between versions.
 
+## v1.1.0 - 2026-05-19
+
+Skill installation now supports `role-scoped` and `all-agents` profiles under `skillsets/`, plus agent-group installs with `SKILL_GROUP`.
+
 ## v1.0.0 - 2026-05-12
 
 This release adds the transparent Agent Memory Tools logo to the README using the new brand asset.

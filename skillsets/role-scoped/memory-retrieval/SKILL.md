@@ -6,6 +6,7 @@ metadata:
   audience: agents
   workflow: memory-retrieval
   domain: agent-memory
+  access_profile: role-scoped
   allowed_agents: planner,context-builder,coder-1,coder-2,coder-3,code-reviewer,code-validator,memory-manager,git-committer
 ---
 
@@ -36,21 +37,9 @@ Use this skill when remembered context may help with planning, coding, validatio
 
 ## Commands
 
-Retrieve by task text:
-
 ```sh
 agent-memory retrieve --query "dashboard auth token"
-```
-
-Add project and tags when known:
-
-```sh
 agent-memory retrieve --query "dashboard auth token" --project dashboard --tags auth,jwt
-```
-
-Use a non-default memory store:
-
-```sh
 agent-memory --memory-dir /path/to/memory retrieve --query "auth token"
 ```
 

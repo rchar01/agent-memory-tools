@@ -9,4 +9,4 @@ Canonical documentation for Agent Memory Tools lives here.
 
 The root `README.md` is intentionally a quick start. These docs are the source of truth for agent behavior.
 
-Role-specific OpenCode skill sources live in `../skills/` and are installed with `make install-skills`.
+OpenCode skill profile sources live in `../skillsets/` and are installed with `make install-skills`.

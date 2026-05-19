@@ -21,6 +21,8 @@ memory-manager verifies memory quality.
 
 ## Agent To Memory Skill Map
 
+This map describes the default `role-scoped` skill profile.
+
 | Agent | Memory skills |
 | --- | --- |
 | `orchestrator` | none directly; only routes memory tasks to `memory-manager` |
@@ -34,10 +36,23 @@ memory-manager verifies memory quality.
 | `memory-manager` | `memory-retrieval`, `memory-write`, `memory-index-update`, `memory-clean`, `memory-verify` |
 | `git-committer` | optional `memory-retrieval` for commit context |
 
-Install all OpenCode memory skills with:
+Install all role-scoped OpenCode memory skills with:
 
 ```bash
 make install-skills
+```
+
+Install the all-agents skillset, where every installed memory skill is available to any agent:
+
+```bash
+make install-skills SKILL_PROFILE=all-agents
+```
+
+Install skills by agent group:
+
+```bash
+make install-skills SKILL_GROUP=memory-manager
+make install-skills SKILL_GROUP=code-validator
 ```
 
 Install one or more skills by name with:
@@ -46,7 +61,27 @@ Install one or more skills by name with:
 make install-skills SKILL_NAMES="memory-retrieval memory-verify"
 ```
 
-The skill sources live in `skills/` and mirror the tool boundaries below.
+The skill sources live in `skillsets/` and mirror the tool boundaries below.
+
+## Skill Profiles
+
+### `role-scoped`
+
+This is the default profile. It preserves the access model in the table above.
+
+### `all-agents`
+
+This profile installs the same skill names, with direct agent-facing permission text: `Any agent may use this skill.` Use it when every agent should be able to retrieve, write, index, clean, and verify memory directly.
+
+The installed skill names stay the same across profiles:
+
+- `memory-retrieval`
+- `memory-write`
+- `memory-index-update`
+- `memory-clean`
+- `memory-verify`
+
+Installing one profile over another overwrites the installed skill directories with the selected profile's wording.
 
 ## Tool Responsibilities
 
