@@ -1,5 +1,9 @@
 # Agent Memory Tools
 
+<div align="center">
+  <img src="assets/brand/agent-memory-tools-forge-avatar-transfarent-512.png" width="256" alt="Agent Memory Tools logo">
+</div>
+
 Local, installable Markdown memory tools for coding agents.
 
 The package installs one executable:

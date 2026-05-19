@@ -2,6 +2,10 @@
 
 This file gives a short, release-oriented view of what changed between versions.
 
+## v1.0.0 - 2026-05-12
+
+This release adds the transparent Agent Memory Tools logo to the README using the new brand asset.
+
 ## v0.2.0 - 2026-05-12
 
 This release updates the shipped skills to the focused `memory-*` model, adds `memory-index-update`, and makes `memory-manager` the only agent that writes, cleans, indexes, archives, or maintains memory.
